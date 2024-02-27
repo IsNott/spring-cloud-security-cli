@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: api
+
+logging:
+  config: classpath:logback/logback-dev.xml
+
+server:
+  port: 9901
+
