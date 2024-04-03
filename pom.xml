@@ -41,6 +41,7 @@
         <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
         <lettuce-version>6.3.0.RELEASE</lettuce-version>
         <commons-version>3.14.0</commons-version>
+        <elastic.search-version>8.13.0</elastic.search-version>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +74,13 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${elastic.search-version}</version>
             </dependency>
 
 

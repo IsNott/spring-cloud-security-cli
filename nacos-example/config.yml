@@ -47,3 +47,8 @@ jwt:
     tokenPrefix: 'Bearer'
     expireMinute: 60
     expireTime: 3600000
+
+es:
+  port: 9200
+  host: localhost
+  scheme: http
