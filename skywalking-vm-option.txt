@@ -1,0 +1,1 @@
+-javaagent:xx\skywalking-agent.jar -Dskywalking.agent.service_name=cloud-cli

@@ -1,12 +1,12 @@
 package org.nott.cli.common.config;
 
 import org.nott.cli.common.enums.ResponseEnum;
-import org.nott.cli.common.exception.BusinessException;
 import org.nott.cli.common.model.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -48,16 +48,12 @@ public class GlobalExceptionHandlerConfig {
                 .body(Result.fail(ResponseEnum.METHOD_ARGUMENT_NOT_VALID, defaultMessages));
     }
 
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<Result<?>> unauthorizedExceptionHandler(BusinessException e) {
-        log.error("businessExceptionHandler:{}", e.getMessage(), e);
+    @ExceptionHandler({AuthenticationException.class})
+    public ResponseEntity<Result<?>> unauthorizedExceptionHandler(AuthenticationException e) {
+        log.error("unauthorizedExceptionHandler:{}", e.getMessage(), e);
 
-        Result<?> serverResponseEntity = e.getResult();
-        if (serverResponseEntity != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(serverResponseEntity);
-        }
         // 失败返回消息 状态码固定为直接显示消息的状态码
-        return ResponseEntity.status(HttpStatus.OK).body(Result.fail(e.getCode(), e.getMessage()));
+        return ResponseEntity.status(HttpStatus.OK).body(Result.fail(403, e.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -77,7 +73,7 @@ public class GlobalExceptionHandlerConfig {
         log.error("exceptionHandler", e);
         return ResponseEntity.status(HttpStatus.OK).body(Result.fail(ResponseEnum.EXCEPTION));
     }
-    @ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Result<Object>> badCredentialsExceptionHandler(Exception e) {
         log.error("badCredentialsExceptionHandler", e);
         return ResponseEntity.status(HttpStatus.OK).body(Result.fail(ResponseEnum.BAD_CREDNTIAL));
