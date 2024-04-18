@@ -42,6 +42,7 @@
         <lettuce-version>6.3.0.RELEASE</lettuce-version>
         <commons-version>3.14.0</commons-version>
         <elastic.search-version>8.13.0</elastic.search-version>
+        <aspectj.version>1.9.21</aspectj.version>
     </properties>
 
     <dependencyManagement>
@@ -184,6 +185,14 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
         </dependencies>
