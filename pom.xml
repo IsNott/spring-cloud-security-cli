@@ -78,12 +78,17 @@
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
-            <dependency>
-                <groupId>co.elastic.clients</groupId>
-                <artifactId>elasticsearch-java</artifactId>
-                <version>${elastic.search-version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>co.elastic.clients</groupId>-->
+<!--                <artifactId>elasticsearch-java</artifactId>-->
+<!--                <version>${elastic.search-version}</version>-->
+<!--            </dependency>-->
 
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch.client</groupId>-->
+<!--                <artifactId>elasticsearch-rest-client</artifactId>-->
+<!--                <version>${elastic.search-version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -192,7 +197,6 @@
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
-                <scope>runtime</scope>
             </dependency>
 
         </dependencies>

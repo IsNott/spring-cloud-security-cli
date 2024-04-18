@@ -12,6 +12,6 @@ public class ResourceServerAdapter implements AuthConfigAdapter {
 
     @Override
     public List<String> excludePathPatterns() {
-        return Collections.singletonList("/api/**");
+        return Collections.singletonList("/your-api/test");
     }
 }

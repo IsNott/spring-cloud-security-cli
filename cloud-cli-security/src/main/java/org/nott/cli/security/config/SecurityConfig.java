@@ -1,5 +1,7 @@
 package org.nott.cli.security.config;
 
+import org.nott.cli.security.adapter.AuthConfigAdapter;
+import org.nott.cli.security.adapter.ResourceServerAdapter;
 import org.nott.cli.security.jwt.RecruitTokenService;
 import org.nott.cli.security.manager.AuthenticationProviderImpl;
 import org.nott.cli.security.jwt.JWTAuthenticationFilter;
@@ -33,6 +35,12 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
+    private AuthConfigAdapter authConfigAdapter;
+
+    public AuthConfigAdapter getAuthConfigAdapter() {
+        return new ResourceServerAdapter();
+    }
+
     protected AuthenticationManager authenticationManager() throws Exception {
         return new ProviderManager(Arrays.asList((AuthenticationProviderImpl) new AuthenticationProviderImpl(redisTemplate)));
     }
@@ -56,6 +64,8 @@ public class SecurityConfig {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
+                .requestMatchers(getAuthConfigAdapter().excludePathPatterns().toArray(new String[0]))
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().disable()
