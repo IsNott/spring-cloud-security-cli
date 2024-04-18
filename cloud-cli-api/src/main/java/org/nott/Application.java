@@ -7,7 +7,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(scanBasePackages = {"org.nott.cli"})
 @MapperScan(basePackages = {"org.nott.cli.service.mapper.**"})
-@EnableDiscoveryClient
 public class Application {
     public static void main(String[] args) {
 
