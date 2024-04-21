@@ -4,17 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.nott</groupId>
-    <artifactId>spring-cloud-security-cli</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>cloud-cli-common</module>
-        <module>cloud-cli-service</module>
-        <module>cloud-cli-api</module>
-        <module>cloud-cli-security</module>
-        <module>cloud-cli-bean</module>
-        <module>cloud-cli-generate</module>
+       <#list moduleInfos as module>
+           ${module.artifactId}
+       </#list>
     </modules>
 
     <properties>
