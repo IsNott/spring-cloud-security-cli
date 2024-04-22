@@ -1,13 +1,13 @@
 spring:
-profiles:
-active: dev
+  profiles:
+    active: dev
 
-application:
-name: ${parent.applicationName}
+  application:
+    name: ${parent.applicationName}
 
 logging:
-config: classpath:logback/logback.xml
+  config: classpath:logback/logback.xml
 
 server:
-port: 9901
+  port: 9901
 

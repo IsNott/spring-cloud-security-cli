@@ -16,5 +16,5 @@
     </appender>
 
 
-    <logger name="${packageName}.${current.artifactId}" level="info"/>
+    <logger name="${packageName}" level="info"/>
 </configuration>

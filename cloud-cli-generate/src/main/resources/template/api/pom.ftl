@@ -6,7 +6,11 @@
     <parent>
         <groupId>${parent.groupId}</groupId>
         <artifactId>${parent.artifactId}</artifactId>
-        <version>${parent.version}</version>
+        <#if parent.version! != ''>
+         <version>${parent.version}</version>
+         <#else>
+         <version>1.0.0-SNAPSHOT</version>
+         </#if>
     </parent>
 
     <artifactId>${current.artifactId}</artifactId>
@@ -42,9 +46,9 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap -->
 
         <dependency>
-            <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-security</artifactId>
-            <#noparse><version>${cloud.cli-version}</version></#noparse>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.childModuleDirPrefix}-security</artifactId>
+            <version><#noparse>$</#noparse>{${parent.childModuleDirPrefix}-version}</version>
         </dependency>
     </dependencies>
 </project>

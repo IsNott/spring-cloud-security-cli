@@ -6,12 +6,16 @@
 
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
+    <#if version! != ''>
     <version>${version}</version>
+    <#else>
+    <version>1.0.0-SNAPSHOT</version>
+    </#if>
     <packaging>pom</packaging>
     <modules>
-       <#list moduleInfos as module>
-           <module>${module.artifactId}</module>
-       </#list>
+    <#list moduleInfos as module>
+       <module>${module.artifactId}</module>
+    </#list>
     </modules>
 
     <#if description! != ''>
@@ -34,7 +38,7 @@
         <cloud-alibaba-version>2022.0.0.0</cloud-alibaba-version>
         <fast.json-version>2.0.46</fast.json-version>
         <mysql.connector-version>8.0.33</mysql.connector-version>
-        <${childModuleDirPrefix}-version>${version}</${childModuleDirPrefix}-version>
+        <${childModuleDirPrefix}-version><#if version! != ''>${version} <#else>1.0.0-SNAPSHOT</#if></${childModuleDirPrefix}-version>
         <swagger-version>2.0.0-rc2</swagger-version>
         <redisson.version>3.19.3</redisson.version>
         <okhttp-version>4.11.0</okhttp-version>

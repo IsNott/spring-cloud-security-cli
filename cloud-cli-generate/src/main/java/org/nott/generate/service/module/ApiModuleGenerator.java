@@ -58,12 +58,12 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
     public void generateDir(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
         ProjectInfo parent = model.getParent();
         ModuleInfo current = model.getCurrent();
-        File logBack = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + backDirPath + File.separator + "resources/logback/" + "logback.xml");
-        File applicationYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + backDirPath + File.separator + "resources/" + "application.yml");
-        File bootstrapYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + backDirPath + File.separator + "resources/" + "bootstrap.yml");
+        File logBack = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/logback/" + "logback.xml");
+        File applicationYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "application.yml");
+        File bootstrapYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "bootstrap.yml");
         super.writeFile(logBack, "logback.ftl", model);
-        super.writeFile(applicationYml, "api/application.yml.ftl", model);
-        super.writeFile(bootstrapYml, "api/bootstrap.yml.ftl", model);
+        super.writeFile(applicationYml, MODULE_SUFFIX + "/application.yml.ftl", model);
+        super.writeFile(bootstrapYml, MODULE_SUFFIX + "/bootstrap.yml.ftl", model);
 
         logger.info("Module {} ,Writer project resources's file {}", MODULE_SUFFIX, logBack.getPath());
         logger.info("Module {} ,Writer project resources's file {}", MODULE_SUFFIX, applicationYml.getPath());
