@@ -16,5 +16,5 @@
     </appender>
 
 
-    <logger name="${packageName}.${current.artifactId}" level="info"/>
+    <logger name="org.nott.generate" level="info"/>
 </configuration>

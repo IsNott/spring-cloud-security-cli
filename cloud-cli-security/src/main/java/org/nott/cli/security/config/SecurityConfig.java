@@ -58,13 +58,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.headers().cacheControl();
-
+        String[] excludPaths = getAuthConfigAdapter().excludePathPatterns().toArray(new String[0]);
         return http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .requestMatchers(getAuthConfigAdapter().excludePathPatterns().toArray(new String[0]))
+                .requestMatchers(excludPaths)
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

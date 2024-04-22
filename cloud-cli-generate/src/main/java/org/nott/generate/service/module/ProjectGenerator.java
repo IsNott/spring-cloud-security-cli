@@ -1,10 +1,9 @@
-package org.nott.service.module;
+package org.nott.generate.service.module;
 
 
-import org.nott.model.ApplicationInfo;
-import org.nott.model.ProjectInfo;
-import org.nott.service.BaseGenerateService;
-import org.nott.service.CommonProjectGenerate;
+import org.nott.generate.model.ProjectInfo;
+import org.nott.generate.service.BaseGenerateService;
+import org.nott.generate.service.CommonProjectGenerate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,9 +11,9 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 
 @Service
-public class ProjectGenerate extends BaseGenerateService implements CommonProjectGenerate {
+public class ProjectGenerator extends BaseGenerateService implements CommonProjectGenerate {
 
-    Logger logger = LoggerFactory.getLogger(ProjectGenerate.class);
+    Logger logger = LoggerFactory.getLogger(ProjectGenerator.class);
 
     public void doGeneration(ProjectInfo projectInfo, String rootPath) throws Exception {
         this.generatePom(rootPath, projectInfo);

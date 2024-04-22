@@ -1,4 +1,4 @@
-package org.nott.model;
+package org.nott.generate.model;
 
 import lombok.Data;
 
@@ -11,5 +11,5 @@ public class ModuleInfo {
 
     private String version;
 
-    private List<ModuleInfo> dependModuleInfo;
+    private String type;
 }

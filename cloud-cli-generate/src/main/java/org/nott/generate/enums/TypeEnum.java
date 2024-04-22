@@ -1,10 +1,10 @@
-package org.nott.enums;
+package org.nott.generate.enums;
 
 
 public enum TypeEnum {
 
-    SNIPSHOT("SNIPSHOT"),
-    STABLE("STABLE");
+    API("api"),
+    COMMON("COMMON");
 
     private String name;
 

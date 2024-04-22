@@ -1,10 +1,11 @@
-package org.nott.service;
+package org.nott.generate.service;
 
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.nott.model.ProjectInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +14,11 @@ import java.io.OutputStreamWriter;
 
 public class BaseGenerateService {
 
+    private final static Logger logger = LoggerFactory.getLogger(BaseGenerateService.class);
+
     private static String ENCODING = "UTF-8";
+
+    public static final String MODULE_NAME = "cloud-cli-generate";
 
     private static Configuration cfg;
 
@@ -21,11 +26,12 @@ public class BaseGenerateService {
     static {
         try {
             cfg = new Configuration(Configuration.VERSION_2_3_31);
-            File file = new File(System.getProperty("user.dir") + "/src/main/resources/generator");
+            File file = new File(System.getProperty("user.dir") + File.separator + MODULE_NAME + "/src/main/resources/template");
             cfg.setDirectoryForTemplateLoading(file);
             cfg.setDefaultEncoding("UTF-8");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new Error("Failed to load FreeMaker template");
         }
     }
 

@@ -1,7 +1,6 @@
-package org.nott.service;
+package org.nott.generate.service;
 
-import org.nott.model.ApplicationInfo;
-import org.nott.model.ProjectInfo;
+import org.nott.generate.model.ProjectInfo;
 
 public interface CommonProjectGenerate {
 

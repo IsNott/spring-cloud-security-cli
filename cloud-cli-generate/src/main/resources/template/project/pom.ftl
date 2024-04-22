@@ -10,9 +10,13 @@
     <packaging>pom</packaging>
     <modules>
        <#list moduleInfos as module>
-           ${module.artifactId}
+           <module>${module.artifactId}</module>
        </#list>
     </modules>
+
+    <#if description! != ''>
+        <description>${description}</description>
+    </#if>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -30,7 +34,7 @@
         <cloud-alibaba-version>2022.0.0.0</cloud-alibaba-version>
         <fast.json-version>2.0.46</fast.json-version>
         <mysql.connector-version>8.0.33</mysql.connector-version>
-        <cloud.cli-version>1.0-SNAPSHOT</cloud.cli-version>
+        <${childModuleDirPrefix}-version>${version}</${childModuleDirPrefix}-version>
         <swagger-version>2.0.0-rc2</swagger-version>
         <redisson.version>3.19.3</redisson.version>
         <okhttp-version>4.11.0</okhttp-version>
@@ -67,7 +71,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>${jsoup.version}</version>
+                <#noparse><version>${jsoup.version}</version></#noparse>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-sentinel-gateway -->
@@ -80,19 +84,19 @@
 <!--            <dependency>-->
 <!--                <groupId>co.elastic.clients</groupId>-->
 <!--                <artifactId>elasticsearch-java</artifactId>-->
-<!--                <version>${elastic.search-version}</version>-->
+<!--                <#noparse><version>${elastic.search-version}</#noparse></version>-->
 <!--            </dependency>-->
 
 <!--            <dependency>-->
 <!--                <groupId>org.elasticsearch.client</groupId>-->
 <!--                <artifactId>elasticsearch-rest-client</artifactId>-->
-<!--                <version>${elastic.search-version}</version>-->
+<!--                <#noparse><version>${elastic.search-version}</version></#noparse>-->
 <!--            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <#noparse><version>${spring-boot.version}</version></#noparse>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -100,72 +104,72 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-                <version>${mybatis-plus-boot3.version}</version>
+                <#noparse><version>${mybatis-plus-boot3.version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson.version}</version>
+                <#noparse><version>${redisson.version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
+                <#noparse><version>${guava.version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
+                <#noparse><version>${hutool.version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-to-slf4j</artifactId>
-                <version>${log4j.version}</version>
+                <#noparse><version>${log4j.version}</version></#noparse>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>${log4j.version}</version>
+                <#noparse><version>${log4j.version}</version></#noparse>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
-                <version>${log4j.version}</version>
+               <#noparse> <version>${log4j.version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>${fast.json-version}</version>
+                <#noparse><version>${fast.json-version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
-                <version>${mysql.connector-version}</version>
+                <#noparse><version>${mysql.connector-version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>${okhttp-version}</version>
+                <#noparse><version>${okhttp-version}</version></#noparse>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
             <dependency>
                 <groupId>jakarta.validation</groupId>
                 <artifactId>jakarta.validation-api</artifactId>
-                <version>${valid-version}</version>
+                <#noparse><version>${valid-version}</version></#noparse>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
-                <version>${transmittable-thread-local.version}</version>
+                <#noparse><version>${transmittable-thread-local.version}</version> </#noparse>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
@@ -180,7 +184,7 @@
             <dependency>
                 <groupId>io.lettuce</groupId>
                 <artifactId>lettuce-core</artifactId>
-                <version>${lettuce-version}</version>
+                <#noparse><version>${lettuce-version}</version></#noparse>
             </dependency>
 
 
@@ -188,14 +192,14 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${commons-version}</version>
+                <#noparse><version>${commons-version}</version></#noparse>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
+                <#noparse><version>${aspectj.version}</version></#noparse>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
@@ -233,17 +237,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
+                <#noparse><version>${maven.compiler.plugin.version}</version></#noparse>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <#noparse><source>${java.version}</source></#noparse>
+                    <#noparse><target>${java.version}</target></#noparse>
+                    <#noparse><encoding>${project.build.sourceEncoding}</encoding></#noparse>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <#noparse><version>${spring-boot.version}</version></#noparse>
                 <configuration>
                     <layers>
                         <enabled>true</enabled>

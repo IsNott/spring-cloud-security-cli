@@ -1,4 +1,4 @@
-package org.nott.model;
+package org.nott.generate.model;
 
 import lombok.Data;
 
@@ -16,6 +16,12 @@ public class ProjectInfo {
     private String name;
 
     private String description;
+
+    private String childModuleDirPrefix;
+
+    private String childLastPackage;
+
+    private String applicationName;
 
     private List<ModuleInfo> moduleInfos;
 }
