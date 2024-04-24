@@ -45,13 +45,7 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
 
     @Override
     public void generatePom(ModuleFtlModel moduleFtlModel, String basePath, String backDirPath) throws Exception {
-        ProjectInfo parent = moduleFtlModel.getParent();
-        ModuleInfo current = moduleFtlModel.getCurrent();
-        File file = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + "pom.xml");
-
-        super.writeFile(file, "api/pom.ftl", moduleFtlModel);
-
-        logger.info("Module {} ,Writer project pom.xml {}", MODULE_SUFFIX, file.getPath());
+       super.commonGeneratePom4Module(MODULE_SUFFIX,moduleFtlModel,basePath,backDirPath);
     }
 
     @Override

@@ -67,6 +67,6 @@ public class BeanModuleGenerator extends BaseGenerateService implements CommonMo
 
     @Override
     public void generateApplication(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
-
+        logger.info("Module {} , don't need application.java",MODULE_SUFFIX);
     }
 }

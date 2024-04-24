@@ -4,6 +4,9 @@ package org.nott.generate.service;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.nott.generate.model.ModuleFtlModel;
+import org.nott.generate.model.ModuleInfo;
+import org.nott.generate.model.ProjectInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +56,16 @@ public class BaseGenerateService {
             outputStreamWriter.flush();
             outputStreamWriter.close();
         }
+    }
+
+    protected void commonGeneratePom4Module(String moduleSuffix,ModuleFtlModel moduleFtlModel, String basePath, String backDirPath) throws Exception {
+        ProjectInfo parent = moduleFtlModel.getParent();
+        ModuleInfo current = moduleFtlModel.getCurrent();
+        File file = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + "pom.xml");
+
+        this.writeFile(file, moduleSuffix + "/pom.ftl", moduleFtlModel);
+        logger.info("Module {} ,Writer project pom.xml {}", moduleSuffix, file.getPath());
+
     }
 
 }
