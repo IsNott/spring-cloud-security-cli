@@ -46,5 +46,10 @@
             <artifactId>cloud-cli-security</artifactId>
             <version>${cloud.cli-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
     </dependencies>
 </project>

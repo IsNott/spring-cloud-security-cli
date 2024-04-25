@@ -43,6 +43,7 @@
         <commons-version>3.14.0</commons-version>
         <elastic.search-version>8.13.0</elastic.search-version>
         <aspectj.version>1.9.21</aspectj.version>
+        <openfeign.version>4.0.3</openfeign.version>
     </properties>
 
     <dependencyManagement>
@@ -197,6 +198,13 @@
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
             </dependency>
 
         </dependencies>
