@@ -4,7 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.nott.cli.common.config.SpringContextUtils;
+import org.nott.cli.common.utils.SpringContextUtils;
 import org.nott.cli.common.enums.ResponseEnum;
 import org.nott.cli.common.handler.HttpHandler;
 import org.nott.cli.common.model.Result;

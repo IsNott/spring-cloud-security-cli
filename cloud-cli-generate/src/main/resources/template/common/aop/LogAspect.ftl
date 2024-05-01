@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
-* @author Nott
+* @author ${parent.author}
 * @date 2024-4-18
 */
 @Aspect

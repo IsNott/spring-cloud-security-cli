@@ -1,6 +1,6 @@
 package org.nott.generate.config;
 
-import org.nott.cli.common.config.SpringContextUtils;
+import org.nott.cli.common.utils.SpringContextUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

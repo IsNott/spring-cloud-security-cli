@@ -26,7 +26,7 @@ public class GenerateController {
     @RequestMapping("project")
     public Result<Void> project(@RequestBody JSONObject jsonObject) throws Exception{
         ProjectInfo projectInfo = jsonObject.getJSONObject("projectInfo").toJavaObject(ProjectInfo.class);
-        codeGenerator.generator(projectInfo,projectInfo.getModuleInfos());
+        codeGenerator.generator(projectInfo);
         return Result.success();
     }
 }

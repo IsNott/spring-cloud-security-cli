@@ -9,6 +9,7 @@ import org.nott.generate.service.BaseGenerateService;
 import org.nott.generate.service.CommonModuleGenerate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -19,6 +20,10 @@ public class BeanModuleGenerator extends BaseGenerateService implements CommonMo
     Logger logger = LoggerFactory.getLogger(BeanModuleGenerator.class);
 
     public static final String MODULE_SUFFIX = "bean";
+
+    public BeanModuleGenerator(ResourceLoader resourceLoader) {
+        super(resourceLoader);
+    }
 
     public void doGeneration(ProjectInfo projectInfo, String projectsRoot, ModuleInfo moduleInfo) throws Exception {
         String version = moduleInfo.getVersion();

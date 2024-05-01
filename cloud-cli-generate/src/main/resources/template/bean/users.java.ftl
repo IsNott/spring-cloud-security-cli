@@ -17,7 +17,7 @@ import java.util.Collections;
  *
  * </p>
  *
- * @author
+ * @author ${parent.author}
  * @since
  */
 @TableName("your_user_table")

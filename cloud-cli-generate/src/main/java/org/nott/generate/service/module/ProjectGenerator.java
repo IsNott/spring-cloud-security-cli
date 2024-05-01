@@ -6,6 +6,7 @@ import org.nott.generate.service.BaseGenerateService;
 import org.nott.generate.service.CommonProjectGenerate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -14,6 +15,10 @@ import java.io.File;
 public class ProjectGenerator extends BaseGenerateService implements CommonProjectGenerate {
 
     Logger logger = LoggerFactory.getLogger(ProjectGenerator.class);
+
+    public ProjectGenerator(ResourceLoader resourceLoader) {
+        super(resourceLoader);
+    }
 
     public void doGeneration(ProjectInfo projectInfo, String rootPath) throws Exception {
         this.generatePom(rootPath, projectInfo);

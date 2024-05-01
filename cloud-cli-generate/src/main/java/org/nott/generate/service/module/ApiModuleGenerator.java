@@ -9,6 +9,7 @@ import org.nott.generate.service.BaseGenerateService;
 import org.nott.generate.service.CommonModuleGenerate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,6 +25,10 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
 
 
     public static final String MODULE_SUFFIX = "api";
+
+    public ApiModuleGenerator(ResourceLoader resourceLoader) {
+        super(resourceLoader);
+    }
 
     public void doGeneration(ProjectInfo projectInfo, String projectsRoot, ModuleInfo moduleInfo) throws Exception {
         String version = moduleInfo.getVersion();

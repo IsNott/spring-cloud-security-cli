@@ -23,5 +23,7 @@ public class ProjectInfo {
 
     private String applicationName;
 
+    private String author;
+
     private List<ModuleInfo> moduleInfos;
 }

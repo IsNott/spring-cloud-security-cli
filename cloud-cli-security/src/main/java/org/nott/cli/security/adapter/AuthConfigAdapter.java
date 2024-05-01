@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface AuthConfigAdapter {
 
-    String MAYBE_AUTH_URI = "/**/ma/**";
-
     /**
      * 需要授权登陆的路径
      * @return 需要授权登陆的路径列表

@@ -15,12 +15,12 @@ import java.util.Map;
 @RequestMapping("/your-api/")
 public class ExampleController {
 
-@Resource
-private CommonMapper commonMapper;
+    @Resource
+    private CommonMapper commonMapper;
 
-@RequestMapping("test")
-public Result<#noparse><List<Map<String,Object>>></#noparse> test(@RequestBody JSONObject jsonObject){
-List<#noparse><Map<String, Object>></#noparse> result = commonMapper.executeSql("select * from test");
-return Result.success(result);
-}
+    @RequestMapping("test")
+    public Result<#noparse><List<Map<String,Object>>></#noparse> test(@RequestBody JSONObject jsonObject){
+        List<#noparse><Map<String, Object>></#noparse> result = commonMapper.executeSql("select * from test");
+        return Result.success(result);
+    }
 }
