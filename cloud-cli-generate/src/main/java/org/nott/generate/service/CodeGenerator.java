@@ -1,10 +1,12 @@
 package org.nott.generate.service;
 
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.nott.generate.config.SpringContextHolder;
 import org.nott.generate.model.ModuleInfo;
 import org.nott.generate.model.ProjectInfo;
 import org.nott.generate.service.module.*;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -33,15 +35,22 @@ public class CodeGenerator {
     @Resource
     private ServiceModuleGenerator serviceModuleGenerator;
 
+    @Resource
+    private ResourceLoader resourceLoader;
+
     public void generator(ProjectInfo projectInfo) throws Exception {
 
         List<String> moduleList = Arrays.asList("common", "api", "service", "security", "bean");
 
         URL resource = this.getClass().getResource("/");
 
-        String projectsRoot = resource.getFile() + "/projects/";
+        String root = projectInfo.getRoot();
 
-        String projectName = projectInfo.getName();
+        root = root.endsWith("/") ? root : root + "/";
+
+        String projectsRoot = StringUtils.isNotEmpty(root) ? root : resource.getFile() + "/projects/";
+
+        String projectName = projectInfo.getApplicationName();
 
         File file = new File(projectsRoot + projectName);
 

@@ -88,32 +88,61 @@ public class BaseGenerateService {
         Resource resource = resourceLoader.getResource("classpath:template/" + moduleDirName);
         File file = resource.getFile();
         File[] files = file.listFiles();
+        if(files != null){
+            processFiles(files, moduleDirName, moduleFtlModel, basePath, backDirPath, parent);
+        }
+//        for (File featFileDir : files) {
+//            if(featFileDir.isFile() && "pom.ftl".equals(featFileDir.getName())){
+//                continue;
+//            }
+//            if (featFileDir.isDirectory()) {
+//                File[] child = featFileDir.listFiles();
+//                for (File javaFile : child) {
+//                    if(javaFile.isFile()){
+//                        generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, javaFile, parent);
+//                    }else {
+//                        for (File listFile : javaFile.listFiles()) {
+//                            generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, listFile, parent);
+//                        }
+//                    }
+//                }
+//            }else {
+//                generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, featFileDir, parent);
+//            }
+
+//        }
+
+    }
+    private void processFiles(File[] files, String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, ProjectInfo parent) throws Exception{
         for (File featFileDir : files) {
-            if(featFileDir.isFile() && "pom.ftl".equals(featFileDir.getName())){
+            if (featFileDir.isFile() && "pom.ftl".equals(featFileDir.getName())) {
                 continue;
             }
-            if (featFileDir.isDirectory()) {
-                File[] child = featFileDir.listFiles();
-                for (File javaFile : child) {
-                    if(javaFile.isFile()){
-                        generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, javaFile, parent);
-                    }else {
-                        for (File listFile : javaFile.listFiles()) {
-                            generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, listFile, parent);
-                        }
-                    }
-                }
-            }else {
-                generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, featFileDir, parent);
-            }
+            processFile(featFileDir, moduleDirName, moduleFtlModel, basePath, backDirPath, parent);
         }
+    }
 
+    private void processFile(File file, String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, ProjectInfo parent) throws Exception{
+        if (file.isDirectory()) {
+            File[] childFiles = file.listFiles();
+            if (childFiles != null) {
+                for (File childFile : childFiles) {
+                    processFile(childFile, moduleDirName, moduleFtlModel, basePath, backDirPath, parent);
+                }
+            }
+        } else {
+            generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, file, parent);
+        }
     }
 
     private void generateFile(String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, File javaFile, ProjectInfo parent) throws IOException, TemplateException {
         String javaName = "";
         ModuleInfo current = moduleFtlModel.getCurrent();
-        if(!javaFile.getName().contains("xml")){
+        String javaFilePath = javaFile.getPath();
+        boolean inResources = javaFilePath.contains("resources");
+
+        boolean isJavaApplicationFile = "Application.ftl".equals(javaFile.getName());
+        if(!javaFile.getName().contains("xml") && !javaFile.getName().contains("yml")){
             javaName = javaFile.getName().replaceAll(".ftl", ".java");
         }else {
             javaName = javaFile.getName().replaceAll(".ftl", "");
@@ -121,11 +150,23 @@ public class BaseGenerateService {
         String parent1 = javaFile.getParent();
 
         String lastPathName = parent1.substring(parent1.indexOf(moduleDirName));
+
         if("security".equals(moduleDirName)){
             lastPathName = lastPathName.substring(lastPathName.lastIndexOf(moduleDirName));
         }
-        File generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator
-                + lastPathName + File.separator + javaName);
+
+
+        File generateFile = null;
+
+        if(inResources){
+            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources" + File.separator + javaName);
+        } else if(isJavaApplicationFile){
+            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + moduleFtlModel.getPackageName().replaceAll("\\.","/") + File.separator + javaName);
+        }
+        else {
+            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator
+                    + lastPathName + File.separator + javaName);
+        }
 
         writeFile(generateFile,  lastPathName + File.separator + javaFile.getName(), moduleFtlModel);
         logger.info("Module {} ,Writer file {}", moduleDirName, generateFile.getPath());

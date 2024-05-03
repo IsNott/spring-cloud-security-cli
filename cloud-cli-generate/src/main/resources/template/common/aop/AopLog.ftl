@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface AopLog {
 
-String value() default "";
+    String value() default "";
 
-boolean isSave() default false;
+    boolean isSave() default false;
 }

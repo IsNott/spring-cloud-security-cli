@@ -1,8 +1,8 @@
-package org.nott.cli.service.impl;
+package ${parent.groupId}.${parent.childLastPackage}.service.impl;
 
 
-import org.nott.cli.bean.model.Users;
-import org.nott.cli.common.exception.BusinessException;
+import ${parent.groupId}.${parent.childLastPackage}.bean.model.Users;
+import ${parent.groupId}.${parent.childLastPackage}.common.exception.BusinessException;
 import ${parent.groupId}.${parent.childLastPackage}.service.mapper.UsersMapper;
 import ${parent.groupId}.${parent.childLastPackage}.service.IUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

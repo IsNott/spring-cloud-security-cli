@@ -41,9 +41,11 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
         model.setPackageName(basePackage);
         model.setParent(projectInfo);
         model.setCurrent(moduleInfo);
-        this.generatePom(model, projectsRoot, backDirPath);
-        this.generateDir(model, projectsRoot, backDirPath);
-        this.generateApplication(model, projectsRoot, backDirPath);
+//        this.generatePom(model, projectsRoot, backDirPath);
+//        this.generateDir(model, projectsRoot, backDirPath);
+//        this.generateApplication(model, projectsRoot, backDirPath);
+        super.commonGeneratePom4Module(MODULE_SUFFIX,model,projectsRoot,backDirPath);
+        super.generateFileByLoopTmpDir(MODULE_SUFFIX,model,projectsRoot,backDirPath);
 
     }
 
@@ -57,9 +59,9 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
     public void generateDir(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
         ProjectInfo parent = model.getParent();
         ModuleInfo current = model.getCurrent();
-        File logBack = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/logback/" + "logback.xml");
-        File applicationYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "application.yml");
-        File bootstrapYml = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "bootstrap.yml");
+        File logBack = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/logback/" + "logback.xml");
+        File applicationYml = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "application.yml");
+        File bootstrapYml = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/" + "bootstrap.yml");
         super.writeFile(logBack, "logback.ftl", model);
         super.writeFile(applicationYml, MODULE_SUFFIX + "/application.yml.ftl", model);
         super.writeFile(bootstrapYml, MODULE_SUFFIX + "/bootstrap.yml.ftl", model);
@@ -72,7 +74,8 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
     public void generateApplication(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
         ModuleInfo current = model.getCurrent();
         ProjectInfo parent = model.getParent();
-        File file = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator + "Application.java");
+        File file = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator + "Application.java");
+        File controllerfile = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator + "controller" + File.separator + "ExampleController.java");
         super.writeFile(file, "api/application.ftl", model);
         logger.info("Module {} ,Writer project application.java {}", MODULE_SUFFIX, file.getPath());
 

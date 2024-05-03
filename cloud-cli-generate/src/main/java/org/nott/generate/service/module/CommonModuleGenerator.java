@@ -37,7 +37,7 @@ public class CommonModuleGenerator extends BaseGenerateService implements Common
 
     @Override
     public void generateDir(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
-        super.generateFileByLoopTmpDir(MODULE_SUFFIX, model ,basePath,backDirPath);
+        super.generateFileByLoopTmpDir(MODULE_SUFFIX, model, basePath, backDirPath);
     }
 
     @Override

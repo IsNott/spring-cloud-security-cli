@@ -23,8 +23,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-service</artifactId>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.childModuleDirPrefix}-service</artifactId>
             <version><#noparse>$</#noparse>{${parent.childModuleDirPrefix}-version}</version>
         </dependency>
 

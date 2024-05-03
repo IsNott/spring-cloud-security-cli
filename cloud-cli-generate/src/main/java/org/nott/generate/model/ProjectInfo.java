@@ -13,8 +13,6 @@ public class ProjectInfo {
 
     private String version;
 
-    private String name;
-
     private String description;
 
     private String childModuleDirPrefix;
@@ -24,6 +22,8 @@ public class ProjectInfo {
     private String applicationName;
 
     private String author;
+
+    private String root;
 
     private List<ModuleInfo> moduleInfos;
 }

@@ -36,6 +36,7 @@ public class BeanModuleGenerator extends BaseGenerateService implements CommonMo
         model.setPackageName(basePackage);
         model.setParent(projectInfo);
         model.setCurrent(moduleInfo);
+
         this.generatePom(model, projectsRoot, backDirPath);
         this.generateDir(model, projectsRoot, backDirPath);
 
@@ -44,29 +45,12 @@ public class BeanModuleGenerator extends BaseGenerateService implements CommonMo
 
     @Override
     public void generatePom(ModuleFtlModel moduleFtlModel, String basePath, String backDirPath) throws Exception {
-        ProjectInfo parent = moduleFtlModel.getParent();
-        ModuleInfo current = moduleFtlModel.getCurrent();
-        File file = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + "pom.xml");
-
-        super.writeFile(file, MODULE_SUFFIX + "/pom.ftl", moduleFtlModel);
-
-        logger.info("Module {} ,Writer project pom.xml {}", MODULE_SUFFIX, file.getPath());
+        super.commonGeneratePom4Module(MODULE_SUFFIX,moduleFtlModel,basePath,backDirPath);
     }
 
     @Override
     public void generateDir(ModuleFtlModel model, String basePath, String backDirPath) throws Exception {
-        ProjectInfo parent = model.getParent();
-        ModuleInfo current = model.getCurrent();
-        String packageName = model.getPackageName();
-        String dirName = packageName.replaceAll("\\.","/");
-        File resourseDir = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources/");
-        File userJavaFile = new File(basePath + parent.getName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + dirName + "/bean/model/" + "Users.java");
-        super.writeFile(userJavaFile, MODULE_SUFFIX + "/users.java.ftl", model);
-
-        if(!resourseDir.exists()){
-            resourseDir.mkdir();
-        }
-        logger.info("Module {} ,Writer project resources's dir {}", MODULE_SUFFIX, resourseDir.getPath());
+        super.generateFileByLoopTmpDir(MODULE_SUFFIX,model,basePath,backDirPath);
 
     }
 

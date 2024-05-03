@@ -4,15 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-            <groupId>${parent.groupId}</groupId>
-            <artifactId>${parent.artifactId}</artifactId>
-            <#if parent.version! != ''>
-            <version>${parent.version}</version>
-            <#else>
-            <version>1.0.0-SNAPSHOT</version>
-            </#if>
-
-        </parent>
+       <groupId>${parent.groupId}</groupId>
+       <artifactId>${parent.artifactId}</artifactId>
+       <#if parent.version! != ''>
+       <version>${parent.version}</version>
+       <#else>
+       <version>1.0.0-SNAPSHOT</version>
+       </#if>
+    </parent>
 
         <artifactId>${current.artifactId}</artifactId>
 
@@ -30,9 +29,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-service</artifactId>
-            <version><#noparse>${cloud.cli-version}</#noparse></version>
+           <groupId>${parent.groupId}</groupId>
+           <artifactId>${parent.childModuleDirPrefix}-service</artifactId>
+           <version><#noparse>$</#noparse>{${parent.childModuleDirPrefix}-version}</version>
         </dependency>
 
         <dependency>

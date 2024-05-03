@@ -6,7 +6,7 @@ spring:
     name: ${parent.applicationName}
 
 logging:
-  config: classpath:logback/logback.xml
+  config: classpath:logback-dev.xml
 
 server:
   port: 9901

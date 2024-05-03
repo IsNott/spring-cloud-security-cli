@@ -23,15 +23,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-bean</artifactId>
-            <version><#noparse>${cloud.cli-version}</#noparse></version>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.childModuleDirPrefix}-bean</artifactId>
+           <version><#noparse>$</#noparse>{${parent.childModuleDirPrefix}-version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-common</artifactId>
-            <version><#noparse>${cloud.cli-version}</#noparse></version>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.childModuleDirPrefix}-common</artifactId>
+           <version><#noparse>$</#noparse>{${parent.childModuleDirPrefix}-version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->

@@ -1,4 +1,4 @@
-package${parent.groupId}.${parent.childLastPackage}.common.xss;
+package ${parent.groupId}.${parent.childLastPackage}.common.xss;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
