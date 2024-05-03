@@ -40,9 +40,10 @@ spring-cloud-security-cli
 ```
 ## 开发日志
 
-| date | todo | done | doing | fix |
-| --- | --- | --- | --- | --- |
-| 2024/5/3| 测试cloud-cli-generate模块生成功能 | cloud-cli-generate生成项目各模块大致逻辑 | cloud-cli-generate替换模板内容| / |
+| date | module | todo | done | doing | fix |
+| --- | --- | --- | --- | --- | -- |
+| 2024/5/3| generate | 测试各模块生成接口 | 生成项目各模块逻辑 | 替换模板内容| / |
+| 2024/5/3| generate | RestAPI生成单体项目功能 | 生成微服务项目功能 | / | / |
 
 ## 说明
 
