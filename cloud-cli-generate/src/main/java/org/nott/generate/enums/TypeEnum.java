@@ -3,12 +3,16 @@ package org.nott.generate.enums;
 
 public enum TypeEnum {
 
-    API("api"),
-    COMMON("COMMON");
+    STANDALONE("0"),
+    MICROSERVICE("1");
 
-    private String name;
+    private String val;
 
-    TypeEnum(String name) {
-        this.name = name;
+    TypeEnum(String val) {
+        this.val = val;
+    }
+
+    public String getVal() {
+        return val;
     }
 }

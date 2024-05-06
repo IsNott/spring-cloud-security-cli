@@ -35,7 +35,9 @@
         <mybatis-plus.version>3.5.0</mybatis-plus.version>
         <mybatis-plus-boot3.version>3.5.5</mybatis-plus-boot3.version>
         <log4j.version>2.20.0</log4j.version>
+        <#if mode == "1">
         <cloud-alibaba-version>2022.0.0.0</cloud-alibaba-version>
+        </#if>
         <fast.json-version>2.0.46</fast.json-version>
         <mysql.connector-version>8.0.33</mysql.connector-version>
         <${childModuleDirPrefix}-version><#if version! != ''>${version} <#else>1.0.0-SNAPSHOT</#if></${childModuleDirPrefix}-version>
@@ -54,35 +56,40 @@
 
     <dependencyManagement>
         <dependencies>
+            <#if mode == "1">
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-commons -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-commons</artifactId>
             </dependency>
-
+            </#if>
+            <#if mode == "1">
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             </dependency>
-
+            </#if>
+            <#if mode == "1">
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
             </dependency>
+            </#if>
 
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <#noparse><version>${jsoup.version}</version></#noparse>
             </dependency>
-
+            <#if mode == "1">
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-sentinel-gateway -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
             </dependency>
+            </#if>
 
             <!-- https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
 <!--            <dependency>-->

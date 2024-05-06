@@ -3,6 +3,7 @@ package org.nott.generate.service;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.nott.generate.config.SpringContextHolder;
+import org.nott.generate.enums.TypeEnum;
 import org.nott.generate.model.ModuleInfo;
 import org.nott.generate.model.ProjectInfo;
 import org.nott.generate.service.module.*;
@@ -35,10 +36,11 @@ public class CodeGenerator {
     @Resource
     private ServiceModuleGenerator serviceModuleGenerator;
 
-    @Resource
-    private ResourceLoader resourceLoader;
-
     public void generator(ProjectInfo projectInfo) throws Exception {
+
+        if(projectInfo.getMode() == null){
+            projectInfo.setMode(TypeEnum.MICROSERVICE.getVal());
+        }
 
         List<String> moduleList = Arrays.asList("common", "api", "service", "security", "bean");
 

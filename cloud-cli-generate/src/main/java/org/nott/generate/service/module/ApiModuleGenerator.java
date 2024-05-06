@@ -75,8 +75,7 @@ public class ApiModuleGenerator extends BaseGenerateService implements CommonMod
         ModuleInfo current = model.getCurrent();
         ProjectInfo parent = model.getParent();
         File file = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator + "Application.java");
-        File controllerfile = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator + "controller" + File.separator + "ExampleController.java");
-        super.writeFile(file, "api/application.ftl", model);
+        super.writeFile(file, "api/Application.ftl", model);
         logger.info("Module {} ,Writer project application.java {}", MODULE_SUFFIX, file.getPath());
 
     }

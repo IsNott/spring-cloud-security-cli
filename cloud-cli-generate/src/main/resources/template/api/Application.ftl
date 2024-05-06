@@ -3,11 +3,11 @@ package ${packageName};
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+<#if parent.mode! == "1">import org.springframework.cloud.client.discovery.EnableDiscoveryClient;</#if>
 
 @SpringBootApplication(scanBasePackages = {"${packageName}"})
 @MapperScan(basePackages = {"${packageName}.service.mapper.**"})
-@EnableDiscoveryClient
+<#if parent.mode! == "1">@EnableDiscoveryClient</#if>
 public class Application {
      public static void main(String[] args) {
 

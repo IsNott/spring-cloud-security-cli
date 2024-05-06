@@ -6,6 +6,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.nott.generate.consts.CommonConst;
+import org.nott.generate.enums.TypeEnum;
 import org.nott.generate.model.ModuleFtlModel;
 import org.nott.generate.model.ModuleInfo;
 import org.nott.generate.model.ProjectInfo;
@@ -91,26 +92,6 @@ public class BaseGenerateService {
         if(files != null){
             processFiles(files, moduleDirName, moduleFtlModel, basePath, backDirPath, parent);
         }
-//        for (File featFileDir : files) {
-//            if(featFileDir.isFile() && "pom.ftl".equals(featFileDir.getName())){
-//                continue;
-//            }
-//            if (featFileDir.isDirectory()) {
-//                File[] child = featFileDir.listFiles();
-//                for (File javaFile : child) {
-//                    if(javaFile.isFile()){
-//                        generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, javaFile, parent);
-//                    }else {
-//                        for (File listFile : javaFile.listFiles()) {
-//                            generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, listFile, parent);
-//                        }
-//                    }
-//                }
-//            }else {
-//                generateFile(moduleDirName, moduleFtlModel, basePath, backDirPath, featFileDir, parent);
-//            }
-
-//        }
 
     }
     private void processFiles(File[] files, String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, ProjectInfo parent) throws Exception{
@@ -136,16 +117,27 @@ public class BaseGenerateService {
     }
 
     private void generateFile(String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, File javaFile, ProjectInfo parent) throws IOException, TemplateException {
+        boolean isStandAlone = TypeEnum.STANDALONE.getVal().equals(parent.getMode());
+
         String javaName = "";
         ModuleInfo current = moduleFtlModel.getCurrent();
         String javaFilePath = javaFile.getPath();
-        boolean inResources = javaFilePath.contains("resources");
+        String javaFileName = javaFile.getName();
 
-        boolean isJavaApplicationFile = "Application.ftl".equals(javaFile.getName());
-        if(!javaFile.getName().contains("xml") && !javaFile.getName().contains("yml")){
-            javaName = javaFile.getName().replaceAll(".ftl", ".java");
+        String type = current.getType();
+
+        if("api".equals(type) && isStandAlone && "bootstrap.yml.ftl".equals(javaFileName)){
+            logger.debug("Api module skip generate bootstrap.yml");
+            return;
+        }
+
+        boolean inResources = javaFilePath.contains("resources");
+        boolean isJavaApplicationFile = "Application.ftl".equals(javaFileName);
+
+        if(!javaFileName.contains("xml") && !javaFileName.contains("yml")){
+            javaName = javaFileName.replaceAll(".ftl", ".java");
         }else {
-            javaName = javaFile.getName().replaceAll(".ftl", "");
+            javaName = javaFileName.replaceAll(".ftl", "");
         }
         String parent1 = javaFile.getParent();
 
@@ -154,7 +146,6 @@ public class BaseGenerateService {
         if("security".equals(moduleDirName)){
             lastPathName = lastPathName.substring(lastPathName.lastIndexOf(moduleDirName));
         }
-
 
         File generateFile = null;
 

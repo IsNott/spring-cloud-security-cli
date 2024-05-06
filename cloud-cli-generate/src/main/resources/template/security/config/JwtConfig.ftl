@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-@RefreshScope
+<#if parent.mode! == "1">@RefreshScope</#if>
 @Data
 @Component
 @ConfigurationProperties(prefix = "jwt.token")
