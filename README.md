@@ -44,6 +44,27 @@ spring-cloud-security-cli
 | --- | --- | --- | --- | --- | -- |
 | 2024/5/3| generate | 测试各模块生成接口 | 生成项目各模块逻辑 | 替换模板内容| / |
 | 2024/5/3| generate | RestAPI生成单体项目功能 | 生成微服务项目功能 | / | / |
+|2024/5/6|generate| 替换模板date注释内容 | RestAPI生成单体项目功能  | / | / |
+
+## REST API生成项目
+### 运行cloud-cli-generate模块的GeneratorApplication
+
+### 发送http请求
+```
+path: /generate/project
+body:{
+    "projectInfo": {
+        "groupId": "org.test", // 项目groupId
+        "artifactId": "standalone", // 项目artifactId
+        "applicationName": "standalone-test", // 应用名称
+        "author": "test", // 作者 默认=default
+        "childModuleDirPrefix": "standalone-test-cli", // 子模块名称前缀
+        "childLastPackage": "cli", // 子模块包名后缀
+        "root":"D:\\新建文件夹", // 项目路径
+        "mode":"0" // 1-微服务 0-单体 不填默认微服务
+    }
+}
+```
 
 ## 说明
 
