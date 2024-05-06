@@ -14,6 +14,7 @@
         <module>cloud-cli-api</module>
         <module>cloud-cli-security</module>
         <module>cloud-cli-bean</module>
+        <module>cloud-cli-generate</module>
     </modules>
 
     <properties>
@@ -43,6 +44,7 @@
         <commons-version>3.14.0</commons-version>
         <elastic.search-version>8.13.0</elastic.search-version>
         <aspectj.version>1.9.21</aspectj.version>
+        <freemark.version>2.3.31</freemark.version>
     </properties>
 
     <dependencyManagement>
@@ -199,6 +201,19 @@
                 <version>${aspectj.version}</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.31</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.28</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -236,6 +251,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <configuration>
                     <layers>
                         <enabled>true</enabled>

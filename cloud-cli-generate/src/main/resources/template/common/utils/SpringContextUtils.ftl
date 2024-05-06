@@ -1,4 +1,4 @@
-package org.nott.cli.common.config;
+package ${parent.groupId}.${parent.childLastPackage}.common.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

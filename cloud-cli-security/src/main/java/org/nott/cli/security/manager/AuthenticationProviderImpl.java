@@ -1,7 +1,7 @@
 package org.nott.cli.security.manager;
 
 import org.apache.commons.lang3.StringUtils;
-import org.nott.cli.common.config.SpringContextUtils;
+import org.nott.cli.common.utils.SpringContextUtils;
 import org.nott.cli.security.model.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

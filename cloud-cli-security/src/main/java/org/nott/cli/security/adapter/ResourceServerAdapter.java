@@ -1,5 +1,6 @@
 package org.nott.cli.security.adapter;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,6 @@ public class ResourceServerAdapter implements AuthConfigAdapter {
 
     @Override
     public List<String> excludePathPatterns() {
-        return Collections.singletonList("/your-api/test");
+        return Arrays.asList("/your-api/test");
     }
 }
