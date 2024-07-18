@@ -17,7 +17,7 @@
 ## 分支
 
 ```
-master # 源分支
+master # 源分支(目前最新-latest)
 ├─ feature/freemarker-1.0.0 # 生成器功能开发分支
 ├─ feature/standalone1.0.0  # 单体功能分支
 ├─ feature/microservice1.0.0 # 微服务功能分支
@@ -31,11 +31,11 @@ spring-cloud-security-cli
 |       └config.yml # nacos参考配置文件
 ├─ cloud-cli-service # 服务层模块
 ├─ cloud-cli-security # 安全认证模块
-├─ cloud-cli-generate # 代码生成器模块（开发中）
+├─ cloud-cli-generate # 代码生成器模块
 ├─ cloud-cli-common # 通用模块（工具、配置）
 ├─ cloud-cli-bean # 实体类模块
 ├─ cloud-cli-api # Web api服务
-├─ (待定) cloud-cli-pay # 支付SDK分支
+├─ cloud-cli-pay# 支付SDK分支（暂无）
 
 ```
 ## 开发日志
