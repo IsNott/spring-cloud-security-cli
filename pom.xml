@@ -15,6 +15,7 @@
         <module>cloud-cli-security</module>
         <module>cloud-cli-bean</module>
         <module>cloud-cli-generate</module>
+        <module>cloud-cli-gateway</module>
     </modules>
 
     <properties>
@@ -44,6 +45,7 @@
         <commons-version>3.14.0</commons-version>
         <elastic.search-version>8.13.0</elastic.search-version>
         <aspectj.version>1.9.21</aspectj.version>
+        <openfeign.version>4.0.3</openfeign.version>
         <freemark.version>2.3.31</freemark.version>
     </properties>
 
@@ -203,6 +205,12 @@
                 <version>${aspectj.version}</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
             <dependency>
                 <groupId>org.freemarker</groupId>
