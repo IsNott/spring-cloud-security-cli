@@ -36,6 +36,7 @@ spring-cloud-security-cli
 ├─ cloud-cli-bean # 实体类模块
 ├─ cloud-cli-api # Web api服务
 ├─ cloud-cli-pay# 支付SDK分支（暂无）
+├─ cloud-cli-gateway# 微服务网关分支（仅在微服务分支）
 
 ```
 ## 开发日志
