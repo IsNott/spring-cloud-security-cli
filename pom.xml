@@ -15,6 +15,7 @@
         <module>cloud-cli-security</module>
         <module>cloud-cli-bean</module>
         <module>cloud-cli-generate</module>
+        <module>cloud-cli-gateway</module>
     </modules>
 
     <properties>
@@ -59,12 +60,14 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${cloud-alibaba-version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${cloud-alibaba-version}</version>
             </dependency>
 
             <dependency>
@@ -214,6 +217,7 @@
                 <artifactId>freemarker</artifactId>
                 <version>2.3.28</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -251,7 +255,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
                 <configuration>
                     <layers>
                         <enabled>true</enabled>

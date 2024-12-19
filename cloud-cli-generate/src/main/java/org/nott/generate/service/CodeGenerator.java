@@ -2,6 +2,7 @@ package org.nott.generate.service;
 
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.nott.generate.config.GeneratorConfig;
 import org.nott.generate.config.SpringContextHolder;
 import org.nott.generate.enums.TypeEnum;
 import org.nott.generate.model.ModuleInfo;
@@ -36,13 +37,19 @@ public class CodeGenerator {
     @Resource
     private ServiceModuleGenerator serviceModuleGenerator;
 
+    @Resource
+    private GatewayModuleGenerator gatewayModuleGenerator;
+
+    @Resource
+    private GeneratorConfig generatorConfig;
+
     public void generator(ProjectInfo projectInfo) throws Exception {
 
         if(projectInfo.getMode() == null){
             projectInfo.setMode(TypeEnum.MICROSERVICE.getVal());
         }
 
-        List<String> moduleList = Arrays.asList("common", "api", "service", "security", "bean");
+        List<String> moduleList = generatorConfig.getModules();
 
         URL resource = this.getClass().getResource("/");
 
@@ -50,7 +57,7 @@ public class CodeGenerator {
 
         root = root.endsWith("/") ? root : root + "/";
 
-        String projectsRoot = StringUtils.isNotEmpty(root) ? root : resource.getFile() + "/projects/";
+        String projectsRoot = StringUtils.isNotEmpty(root) ? root : resource.getFile() + generatorConfig.getProjectRoot();
 
         String projectName = projectInfo.getApplicationName();
 
@@ -60,7 +67,7 @@ public class CodeGenerator {
 
         String author = projectInfo.getAuthor();
         if (author == null) {
-            projectInfo.setAuthor("default");
+            projectInfo.setAuthor(generatorConfig.getDefaultAuthor());
         }
 
         List<ModuleInfo> moduleInfos = new ArrayList<>();
@@ -91,6 +98,9 @@ public class CodeGenerator {
                     break;
                 case "service":
                     serviceModuleGenerator.doGeneration(projectInfo, projectsRoot, r);
+                    break;
+                case "gateway":
+                    gatewayModuleGenerator.doGeneration(projectInfo, projectsRoot, r);
                     break;
             }
         }
