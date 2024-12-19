@@ -1,7 +1,9 @@
 # spring-cloud-security-cli
 简单的Springboot3.x+cloud脚手架
+
 ## 介绍
 个人自用的脚手架，用于快速搭建基于SpringCloud Alibaba的分布式Spring boot项目。
+
 ## 依赖
 
 | name                 | version       |
@@ -36,7 +38,7 @@ spring-cloud-security-cli
 ├─ cloud-cli-bean # 实体类模块
 ├─ cloud-cli-api # Web api服务
 ├─ cloud-cli-pay# 支付SDK分支（暂无）
-├─ cloud-cli-gateway# 微服务网关分支（仅在微服务分支）
+├─ cloud-cli-gateway# 微服务网关(microservice)
 
 ```
 ## 开发日志
