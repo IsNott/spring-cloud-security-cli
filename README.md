@@ -1,36 +1,30 @@
 # spring-cloud-security-cli
-简单的Springboot3.x+cloud脚手架
+
+简单的Springboot3.x+Cloud脚手架。
 
 ## 介绍
+
 个人自用的脚手架，用于快速搭建基于SpringCloud Alibaba的分布式Spring boot项目。
 
 ## 依赖
 
-| name                 | version       |
-| -------------------- | ------------- |
-| Java                 | 17            |
-| Spring-Boot          | 3.0.7         |
-| Spring-Security-Web  | 6.0.3         |
-| jjwt                 | 0.9.1         |
-| Mybatis-plus         | 3.5.0         |
-| Mybatis-Plus-Boot3   | 3.5.5         |
-| Spring-Cloud-Alibaba | 2022.0.0.0    |
-
-## 分支
-
-```
-master # 源分支(目前最新-latest)
-├─ feature/freemarker-1.0.0 # 生成器功能开发分支
-├─ feature/standalone1.0.0  # 单体功能分支
-├─ feature/microservice1.0.0 # 微服务功能分支
-
-```
+| name                   | version    |
+|------------------------|------------|
+| Java                   | 17         |
+| Spring-Boot            | 3.0.7      |
+| Spring-Security-Web    | 6.0.3      |
+| jjwt                   | 0.9.1      |
+| Mybatis-plus           | 3.5.0      |
+| Mybatis-Plus-Boot3     | 3.5.5      |
+| Spring-Cloud-Alibaba   | 2022.0.0.0 |
+| Spring-Cloud-Gateway   | 4.0.3      |
+| Spring-Cloud-OpenFeign | 4.0.3      |
 
 ## 模块
 ```
 spring-cloud-security-cli
 ├─nacos-example
-|       └config.yml # nacos参考配置文件
+|       └config.yml # api模块nacos参考配置文件
 ├─ cloud-cli-service # 服务层模块
 ├─ cloud-cli-security # 安全认证模块
 ├─ cloud-cli-generate # 代码生成器模块
@@ -38,21 +32,20 @@ spring-cloud-security-cli
 ├─ cloud-cli-bean # 实体类模块
 ├─ cloud-cli-api # Web api服务
 ├─ cloud-cli-pay# 支付SDK分支（暂无）
-├─ cloud-cli-gateway# 微服务网关(microservice)
-
+├─ cloud-cli-gateway# 微服务网关
 ```
-## 开发日志
 
-| date | module | todo | done | doing | fix |
-| --- | --- | --- | --- | --- | -- |
-| 2024/5/3| generate | 测试各模块生成接口 | 生成项目各模块逻辑 | 替换模板内容| / |
-| 2024/5/3| generate | RestAPI生成单体项目功能 | 生成微服务项目功能 | / | / |
-|2024/5/6|generate| 替换模板date注释内容 | RestAPI生成单体项目功能  | / | / |
+## 功能
+根据API请求生成项目模板：
+- 单体项目（普通的Spring boot项目）
+- 微服务项目（包含网关，重写了Filter、Predicate，默认以统一前缀:/api/{注册服务名}，转发请求）。
+
+*以上均包含服务层、安全认证、通用、实体类、API模块*
 
 ## REST API生成项目
-### 运行cloud-cli-generate模块的GeneratorApplication
+1.运行cloud-cli-generate模块的GeneratorApplication
 
-### 发送http请求
+2.发送http请求
 ```
 path: /generate/project
 body:{
@@ -69,10 +62,20 @@ body:{
 }
 ```
 
+## 分支
+
+```
+master # 源分支(最新版本)
+├─ feature/freemarker-1.0.0 # 生成器功能开发分支
+├─ feature/standalone1.0.0 # 单体服务功能分支
+├─ feature/microservice1.0.0 # 微服务功能分支
+```
+## 开发日志
+
+查看以往Commits记录。
+
 ## 说明
 
-基于 Apache 2.0 开源协议，可随意拉取或fork项目。
-
-假如你的项目有更多的日常复用的脚手架功能，欢迎提供PR加入到项目中。
-
-如果此项目对你有用，请帮忙点一个star，谢谢。
+基于 Apache 2.0 开源协议，可随意拉取或fork项目。<br>
+假如你的项目有更多的日常复用的脚手架功能，欢迎提供PR加入到项目中。<br>
+如果此项目对你有用，请帮忙点一个star，谢谢。<br>
