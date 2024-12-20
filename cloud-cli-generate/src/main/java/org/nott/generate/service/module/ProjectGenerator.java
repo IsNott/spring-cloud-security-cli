@@ -26,7 +26,7 @@ public class ProjectGenerator extends BaseGenerateService implements CommonProje
 
     @Override
     public void generatePom(String basePath, ProjectInfo info) throws Exception {
-        File file = new File(basePath + info.getArtifactId() + File.separator + "pom.xml");
+        File file = new File(basePath + info.getApplicationName() + File.separator + "pom.xml");
 
         super.writeFile(file, "project/pom.ftl", info);
 

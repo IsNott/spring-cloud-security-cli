@@ -1,0 +1,16 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: cloud-cli-generate
+
+generator:
+  modules:
+    - common
+    - api
+    - service
+    - security
+    - bean
+    - gateway
+  default-author: default
+  project-root: '/projects/'
