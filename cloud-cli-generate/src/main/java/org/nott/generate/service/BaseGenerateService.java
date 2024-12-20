@@ -24,8 +24,6 @@ public class BaseGenerateService {
 
     private final static Logger logger = LoggerFactory.getLogger(BaseGenerateService.class);
 
-    private static String ENCODING = "UTF-8";
-
     public static final String MODULE_NAME = "cloud-cli-generate";
 
     private static Configuration cfg;
@@ -36,14 +34,12 @@ public class BaseGenerateService {
         this.resourceLoader = resourceLoader;
     }
 
-
-
     static {
         try {
             cfg = new Configuration(Configuration.VERSION_2_3_31);
             File file = new File(System.getProperty("user.dir") + File.separator + MODULE_NAME + "/src/main/resources/template");
             cfg.setDirectoryForTemplateLoading(file);
-            cfg.setDefaultEncoding("UTF-8");
+            cfg.setDefaultEncoding(CommonConst.UTF8);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             throw new Error("Failed to load FreeMaker template");
@@ -51,7 +47,7 @@ public class BaseGenerateService {
     }
 
     protected Template getTemplate(String ftl) throws IOException {
-        return cfg.getTemplate(ftl, ENCODING);
+        return cfg.getTemplate(ftl, CommonConst.UTF8);
     }
 
     protected void writeFile(File file, String ftl, Object dataModel) throws IOException, TemplateException {
@@ -73,7 +69,7 @@ public class BaseGenerateService {
     protected void commonGeneratePom4Module(String moduleSuffix,ModuleFtlModel moduleFtlModel, String basePath, String backDirPath) throws Exception {
         ProjectInfo parent = moduleFtlModel.getParent();
         ModuleInfo current = moduleFtlModel.getCurrent();
-        File file = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + "pom.xml");
+        File file = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + "pom.xml");
 
         this.writeFile(file, moduleSuffix + "/pom.ftl", moduleFtlModel);
         logger.info("Module {} ,Writer project pom.xml {}", moduleSuffix, file.getPath());
@@ -96,7 +92,7 @@ public class BaseGenerateService {
     }
     private void processFiles(File[] files, String moduleDirName, ModuleFtlModel moduleFtlModel, String basePath, String backDirPath, ProjectInfo parent) throws Exception{
         for (File featFileDir : files) {
-            if (featFileDir.isFile() && "pom.ftl".equals(featFileDir.getName())) {
+            if (featFileDir.isFile() && CommonConst.POM_FTL.equals(featFileDir.getName())) {
                 continue;
             }
             processFile(featFileDir, moduleDirName, moduleFtlModel, basePath, backDirPath, parent);
@@ -126,36 +122,42 @@ public class BaseGenerateService {
 
         String type = current.getType();
 
-        if("api".equals(type) && isStandAlone && "bootstrap.yml.ftl".equals(javaFileName)){
-            logger.debug("Api module skip generate bootstrap.yml");
+        if((CommonConst.MODULE.API.equals(type)) && isStandAlone && "bootstrap.yml.ftl".equals(javaFileName)){
+            logger.debug("Api/Gateway module skip generate bootstrap.yml");
             return;
         }
 
-        boolean inResources = javaFilePath.contains("resources");
-        boolean isJavaApplicationFile = "Application.ftl".equals(javaFileName);
+        if((CommonConst.MODULE.GATEWAY.equals(type)) && isStandAlone){
+            logger.debug("Gateway module skip generate file while standalone");
+            return;
+        }
 
-        if(!javaFileName.contains("xml") && !javaFileName.contains("yml")){
-            javaName = javaFileName.replaceAll(".ftl", ".java");
+        boolean inResources = javaFilePath.contains(CommonConst.RESOURCES);
+        boolean isJavaApplicationFile = CommonConst.APPLICATION_FTL.equals(javaFileName);
+
+        if(!javaFileName.contains(CommonConst.FILE_SUFFIX.YAML) && !javaFileName.contains(CommonConst.FILE_SUFFIX.XML)
+                && !javaFileName.contains(CommonConst.FILE_SUFFIX.YML)){
+            javaName = javaFileName.replaceAll(CommonConst.FILE_SUFFIX.FTL, CommonConst.FILE_SUFFIX.JAVA);
         }else {
-            javaName = javaFileName.replaceAll(".ftl", "");
+            javaName = javaFileName.replaceAll(CommonConst.FILE_SUFFIX.FTL, "");
         }
         String parent1 = javaFile.getParent();
 
         String lastPathName = parent1.substring(parent1.indexOf(moduleDirName));
 
-        if("security".equals(moduleDirName)){
+        if(CommonConst.MODULE.SECURITY.equals(moduleDirName)){
             lastPathName = lastPathName.substring(lastPathName.lastIndexOf(moduleDirName));
         }
 
         File generateFile = null;
 
         if(inResources){
-            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources" + File.separator + javaName);
+            generateFile = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.MAIN_PATH + File.separator + "resources" + File.separator + javaName);
         } else if(isJavaApplicationFile){
-            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + moduleFtlModel.getPackageName().replaceAll("\\.","/") + File.separator + javaName);
+            generateFile = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + moduleFtlModel.getPackageName().replaceAll("\\.","/") + File.separator + javaName);
         }
         else {
-            generateFile = new File(basePath + parent.getArtifactId() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator
+            generateFile = new File(basePath + parent.getApplicationName() + File.separator + current.getArtifactId() + File.separator + CommonConst.JAVA_PATH + File.separator + backDirPath + File.separator
                     + lastPathName + File.separator + javaName);
         }
 
