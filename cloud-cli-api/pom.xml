@@ -44,5 +44,11 @@
             <artifactId>cloud-cli-security</artifactId>
             <version>${cloud.cli-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.nott</groupId>
+            <artifactId>cloud-cli-feign</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

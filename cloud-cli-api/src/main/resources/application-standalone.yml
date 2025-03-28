@@ -46,3 +46,6 @@ es:
   host: localhost
   scheme: http
 
+swagger2:
+  group-name: "spring-cloud-cli"
+

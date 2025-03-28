@@ -16,6 +16,7 @@
         <module>cloud-cli-bean</module>
         <module>cloud-cli-generate</module>
         <module>cloud-cli-gateway</module>
+        <module>cloud-cli-feign</module>
     </modules>
 
     <properties>

@@ -52,3 +52,6 @@ es:
   port: 9200
   host: localhost
   scheme: http
+
+swagger2:
+  group-name: "spring-cloud-cli"
