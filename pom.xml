@@ -232,6 +232,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+            <version>1.18.32</version>
         </dependency>
 
         <dependency>
