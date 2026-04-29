@@ -1,6 +1,6 @@
 # spring-cloud-security-cli
 
-简单的Springboot3.x+Cloud脚手架。
+简单的Springboot3.x+SpringCloud脚手架。
 
 ## 介绍
 
@@ -31,7 +31,7 @@ spring-cloud-security-cli
 ├─ cloud-cli-common # 通用模块（工具、配置）
 ├─ cloud-cli-bean # 实体类模块
 ├─ cloud-cli-api # Web api服务
-├─ cloud-cli-pay# 支付SDK分支（暂无）
+#├─ cloud-cli-pay# 支付SDK分支（暂无）
 ├─ cloud-cli-gateway# 微服务网关
 ```
 
@@ -42,7 +42,17 @@ spring-cloud-security-cli
 
 *以上均包含服务层、安全认证、通用、实体类、API模块*
 
-## REST API生成项目
+### HTML用户界面生成
+1.运行cloud-cli-generate模块的GeneratorApplication
+
+2.运行cloud-cli-generate/src/main/resources/StaticUserInterface.html
+
+3.按照页面填写数据点击生成。
+
+<img width="1178" height="749" alt="image" src="https://github.com/user-attachments/assets/a4c08f09-8b72-4b9c-855d-2c9082a2329d" />
+
+
+### 访问REST API生成
 1.运行cloud-cli-generate模块的GeneratorApplication
 
 2.发送http请求
@@ -62,6 +72,9 @@ body:{
 }
 ```
 
+## 自行修改模板内容、生成代码内容
+详见cloud-cli-generate模块下代码逻辑，模板参考该模块下的resources/template目录。
+
 ## 分支
 
 ```
@@ -70,9 +83,6 @@ master # 源分支(最新版本)
 ├─ feature/standalone1.0.0 # 单体服务功能分支
 ├─ feature/microservice1.0.0 # 微服务功能分支
 ```
-## 开发日志
-
-查看以往Commits记录。
 
 ## 说明
 
