@@ -6,7 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.nott.cli.security.manager.AuthenticationTokenImpl;
-import org.nott.cli.security.model.SysUser;
+import org.nott.cli.security.model.Users;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,9 +18,9 @@ import java.io.IOException;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-    private RecruitTokenService tokenAuthenticationService;
+    private TokenService tokenAuthenticationService;
 
-    public JWTLoginFilter(String url, AuthenticationManager authenticationManager, RecruitTokenService service) {
+    public JWTLoginFilter(String url, AuthenticationManager authenticationManager, TokenService service) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authenticationManager);
         tokenAuthenticationService = service;
@@ -29,7 +29,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse hsr1)
             throws AuthenticationException, IOException, ServletException {
-        SysUser credentials = new ObjectMapper().readValue(httpServletRequest.getInputStream(), SysUser.class);
+        Users credentials = new ObjectMapper().readValue(httpServletRequest.getInputStream(), Users.class);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
         return getAuthenticationManager().authenticate(token);
     }

@@ -4,7 +4,7 @@ package org.nott.cli.service.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.nott.cli.bean.model.Users;
+import org.nott.cli.security.model.Users;
 
 /**
  * <p>
@@ -16,6 +16,6 @@ import org.nott.cli.bean.model.Users;
  */
 public interface UsersMapper extends BaseMapper<Users> {
 
-    @Select("select * from your_user_table tb where tb.username = #{username}")
+    @Select("select * from sys_user tb where tb.username = #{username}")
     Users getUserByUserName(@Param("username") String username);
 }

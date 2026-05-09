@@ -1,8 +1,11 @@
-package org.nott.cli.bean.model;
+package org.nott.cli.security.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.nott.cli.common.utils.SpringContextUtils;
+import org.nott.cli.security.config.JwtConfig;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +13,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 
 /**
@@ -20,7 +24,7 @@ import java.util.Collections;
  * @author nott
  * @since 2024-02-19
  */
-@TableName("your_user_table")
+@TableName("sys_user")
 public class Users implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +57,9 @@ public class Users implements Serializable, UserDetails {
     private Long companyInfoId;
 
     private Integer gender;
+
+    @TableField(exist = false)
+    private Date storedTime;
 
     public Long getUserId() {
         return userId;
@@ -189,6 +196,20 @@ public class Users implements Serializable, UserDetails {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Date getStoredTime() {
+        return storedTime;
+    }
+
+    public void setStoredTime(Date storedTime) {
+        this.storedTime = storedTime;
+    }
+
+    public boolean hasExpired() {
+        JwtConfig jwtConfig = SpringContextUtils.getBean("jwtConfig", JwtConfig.class);
+        Integer expireTime = jwtConfig.getExpireTime();
+        return this.storedTime == null || new Date(this.storedTime.getTime() + expireTime).before(new Date());
     }
 
     @Override

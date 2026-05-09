@@ -2,7 +2,8 @@ package org.nott.cli.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.nott.cli.bean.model.Users;
+import org.nott.cli.security.model.Users;
+
 
 /**
  * <p>

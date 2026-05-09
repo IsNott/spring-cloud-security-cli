@@ -2,7 +2,7 @@ package org.nott.cli.security.manager;
 
 import lombok.Setter;
 import lombok.ToString;
-import org.nott.cli.security.model.SysUser;
+import org.nott.cli.security.model.Users;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.DigestUtils;
@@ -21,7 +21,7 @@ public class AuthenticationTokenImpl extends AbstractAuthenticationToken {
     }
 
     public void authenticate() {
-        if (getDetails() != null && getDetails() instanceof SysUser && !((SysUser) getDetails()).hasExpired()) {
+        if (getDetails() != null && getDetails() instanceof Users && !((Users) getDetails()).hasExpired()) {
             setAuthenticated(true);
         } else {
             setAuthenticated(false);
@@ -39,6 +39,6 @@ public class AuthenticationTokenImpl extends AbstractAuthenticationToken {
     }
 
     public String getHash() {
-        return DigestUtils.md5DigestAsHex(String.format("%s_%d", username, ((SysUser) getDetails()).getStoredTime().getTime()).getBytes());
+        return DigestUtils.md5DigestAsHex(String.format("%s", username).getBytes());
     }
 }

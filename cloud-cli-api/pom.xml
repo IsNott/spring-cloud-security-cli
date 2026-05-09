@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>org.nott</groupId>
-            <artifactId>cloud-cli-security</artifactId>
+            <artifactId>cloud-cli-service</artifactId>
             <version>${cloud.cli-version}</version>
         </dependency>
     </dependencies>

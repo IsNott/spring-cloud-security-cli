@@ -2,7 +2,7 @@ package org.nott.cli.security.config;
 
 import org.nott.cli.security.adapter.AuthConfigAdapter;
 import org.nott.cli.security.adapter.ResourceServerAdapter;
-import org.nott.cli.security.jwt.RecruitTokenService;
+import org.nott.cli.security.jwt.TokenService;
 import org.nott.cli.security.manager.AuthenticationProviderImpl;
 import org.nott.cli.security.jwt.JWTAuthenticationFilter;
 import org.nott.cli.security.jwt.JWTLoginFilter;
@@ -27,7 +27,7 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Autowired
-    private RecruitTokenService tokenService;
+    private TokenService tokenService;
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;

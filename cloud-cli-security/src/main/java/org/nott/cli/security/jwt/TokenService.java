@@ -2,8 +2,7 @@ package org.nott.cli.security.jwt;
 
 
 import cn.hutool.core.date.DateUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSONObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,7 +15,7 @@ import org.nott.cli.common.handler.HttpHandler;
 import org.nott.cli.common.model.Result;
 import org.nott.cli.security.config.JwtConfig;
 import org.nott.cli.security.manager.AuthenticationTokenImpl;
-import org.nott.cli.security.model.SysUser;
+import org.nott.cli.security.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ import java.util.*;
  * @date 2020/7/2
  */
 @Component
-public class RecruitTokenService {
+public class TokenService {
 
     private HttpHandler httpHandler;
 
@@ -43,7 +42,7 @@ public class RecruitTokenService {
 
     private String secret;
 
-    private static final Logger logger = LoggerFactory.getLogger(RecruitTokenService.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -58,7 +57,7 @@ public class RecruitTokenService {
         return httpHandler;
     }
 
-    public RecruitTokenService(RedisTemplate<String, Object> redisTemplate) {
+    public TokenService(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
         this.secret = Sha512DigestUtils.shaHex(getJwtConfig().getSecret());
     }
@@ -116,15 +115,8 @@ public class RecruitTokenService {
             if (claims != null && claims.containsKey("username")) {
                 String username = claims.get("username").toString();
                 String hash = claims.get("hash").toString();
-                LinkedHashMap<String, Object> obj = (LinkedHashMap) redisTemplate.opsForValue().get(String.format("%s:%s", username, hash));
-                SysUser user = null;
-                try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    String valueAsString = mapper.writeValueAsString(obj);
-                    user = mapper.readValue(valueAsString, SysUser.class);
-                } catch (JsonProcessingException e) {
-                    logger.error("ObjectMapper read error :{}", e.getMessage(), e);
-                }
+                String obj = (String) redisTemplate.opsForValue().get(String.format("%s:%s", username, hash));
+                Users user = JSONObject.parseObject(obj, Users.class);
                 if (user != null) {
                     AuthenticationTokenImpl auth = new AuthenticationTokenImpl(user.getUsername(), Collections.emptyList());
                     auth.setDetails(user);

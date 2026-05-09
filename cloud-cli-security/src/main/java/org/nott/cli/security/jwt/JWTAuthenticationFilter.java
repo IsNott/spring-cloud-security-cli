@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class JWTAuthenticationFilter extends GenericFilterBean {
 
-    private RecruitTokenService service;
+    private TokenService service;
 
-    public JWTAuthenticationFilter(RecruitTokenService service) {
+    public JWTAuthenticationFilter(TokenService service) {
         this.service = service;
     }
 

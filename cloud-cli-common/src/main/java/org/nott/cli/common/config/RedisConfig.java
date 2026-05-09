@@ -43,11 +43,11 @@ public class RedisConfig {
 
         final RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setKeySerializer(new StringRedisSerializer());
-
-        template.setHashValueSerializer(serializer);
-        template.setValueSerializer(serializer);
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        template.setKeySerializer(stringSerializer);
+        template.setHashKeySerializer(stringSerializer);
+        template.setValueSerializer(stringSerializer);
+        template.setHashValueSerializer(stringSerializer);
         return template;
     }
 }

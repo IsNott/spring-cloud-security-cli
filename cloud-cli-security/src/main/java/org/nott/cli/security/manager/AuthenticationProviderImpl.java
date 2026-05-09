@@ -1,8 +1,10 @@
 package org.nott.cli.security.manager;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.nott.cli.common.utils.SpringContextUtils;
-import org.nott.cli.security.model.SysUser;
+import org.nott.cli.security.config.JwtConfig;
+import org.nott.cli.security.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -66,18 +68,15 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 
         Objects.requireNonNull(getUserDetailsService(),"UserDetailService not found");
         UserDetails userDetails = getUserDetailsService().loadUserByUsername(username);
-        String encodedPass = getPasswordEncoder().encode(password);
-
-        //Right now just authenticate on the basis of the user=pass
-        if (!passwordEncoder.matches(userDetails.getPassword(),encodedPass)) {
-            SysUser u = new SysUser();
-            u.setUsername(username);
-            u.setStoredTime(new Date());
-            AuthenticationTokenImpl auth = new AuthenticationTokenImpl(u.getUsername(), Collections.emptyList());
+        if (getPasswordEncoder().matches(password,userDetails.getPassword())) {
+            Users users = (Users) userDetails;
+            users.setStoredTime(new Date());
+            AuthenticationTokenImpl auth = new AuthenticationTokenImpl(users.getUsername(), Collections.emptyList());
             auth.setAuthenticated(true);
-            auth.setDetails(u);
+            auth.setDetails(users);
             ValueOperations<String, Object> ops = redisTemplate.opsForValue();
-            ops.set(String.format("%s:%s", u.getUsername().toLowerCase(), auth.getHash()), u, 3600L, TimeUnit.SECONDS);
+            JwtConfig jwtConfig = SpringContextUtils.getBean("jwtConfig", JwtConfig.class);
+            ops.set(String.format("%s:%s", users.getUsername().toLowerCase(), auth.getHash()), JSON.toJSONString(users), jwtConfig.getExpireMinute(), TimeUnit.MINUTES);
             return auth;
         }
         return null;

@@ -1,8 +1,9 @@
 package org.nott.cli.service.impl;
 
 
-import org.nott.cli.bean.model.Users;
+
 import org.nott.cli.common.exception.BusinessException;
+import org.nott.cli.security.model.Users;
 import org.nott.cli.service.mapper.UsersMapper;
 import org.nott.cli.service.IUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
